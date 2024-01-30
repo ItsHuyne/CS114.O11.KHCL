@@ -55,14 +55,14 @@ Hoàng Gia Huy | 19521607 | 19521607@gm.uit.edu.vn | https://github.com/ItsHuyne
 ## **2.2. INPUT và OUTPUT Bài toán**
   * INPUT: 
     * Một tấm ảnh chụp chân dung của 1 hoặc 2 người ở thế giới thực với đa dạng background, kích thước tấm ảnh đầu vào là 512x512.
-    ![]
-(https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/Input_pic.png)
+ ![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/Input_pic.png)
+
   * OUTPUT: 
     * Là một ảnh mask có cùng kích thước với input, có:
       * các pixel sẽ có các giá trị từ 0-255 đại diện cho xác suất các pixel đó thuộc về foreground hay background.
       * 0 là background, 1 là foreground, các pixel có giá trị nằm trong khoảng (0; 255) sẽ mang các đặc trưng của cả foreground và background. .
 
-      ![](https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/center.png?raw=true)
+      ![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/output_pic.png)
       
 
 
@@ -71,7 +71,9 @@ Hoàng Gia Huy | 19521607 | 19521607@gm.uit.edu.vn | https://github.com/ItsHuyne
 ## **3.1. Giới thiệu về bộ dữ liệu**
 * Nhóm sẽ sử dụng bộ dữ liệu bộ dữ liệu P3M-10k(Li, et al., 2021), đây là bộ dữ liệu chuẩn lớn đầu tiên được ẩn danh cho bài toán Privacy-Preserving Portrait Matting. P3M-10k bao gồm 10.000 hình ảnh chân dung mờ chất lượng cao kèm theo alpha mattes chất lượng cao
 * Những hình ảnh trong bộ dữ liệu sẽ có từ một hoặc tối đa là hai người trong cùng một tấm ảnh với phần bối cảnh đa dạng. Ngoài ra, những tấm ảnh có thể được chụp từ chính diện hoặc từ đằng sau lưng.
- ![](https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/center.png?raw=true)
+ ![]( https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/data_1.jpg)
+ ![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/data_2.jpg)
+ ![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/data_3.jpg)
 
 ### **3.1.1. Thông tin thu thập dữ liệu** <a name= "thuthap"></a>
 
@@ -87,7 +89,7 @@ Hoàng Gia Huy | 19521607 | 19521607@gm.uit.edu.vn | https://github.com/ItsHuyne
     *  ii. Tự động tạo ra mask dựa trên các điểm mốc, bao gồm toàn bộ khuôn mặt.
     *  iii. Loại bỏ phần chuyển tiếp giữa khuôn mặt và nền để chỉ giữ phần khuôn mặt rõ ràng.
     *  iv. Sử dụng Gaussian blur để làm mờ phần trong mask.
-	![](https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/center.png?raw=true)
+	![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/thu_thap.png)
   
 ### **3.1.3. Kết quả thu thập dữ liệu**
 Sau 2 lần thu thập dữ liệu, nhóm thu thập được thêm hơn 1000 ảnh, chủ yếu là ảnh của người nổi tiếng vì nó khá phổ biến và không yêu cầu bản quyền. Tổng cộng là hơn 11,500 tấm ảnh được thu thập.
