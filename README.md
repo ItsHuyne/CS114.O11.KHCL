@@ -59,8 +59,8 @@ Hoàng Gia Huy | 19521607 | 19521607@gm.uit.edu.vn | https://github.com/ItsHuyne
 
   * OUTPUT: 
     * Là một ảnh mask có cùng kích thước với input, có:
-      * các pixel sẽ có các giá trị từ 0-255 đại diện cho xác suất các pixel đó thuộc về foreground hay background.
-      * 0 là background, 1 là foreground, các pixel có giá trị nằm trong khoảng (0; 255) sẽ mang các đặc trưng của cả foreground và background. .
+      * các pixel sẽ có các giá trị từ 0-1 đại diện cho xác suất các pixel đó thuộc về foreground hay background.
+      * 0 là background, 1 là foreground, các pixel có giá trị nằm trong khoảng (0; 1) sẽ mang các đặc trưng của cả foreground và background. .
 
       ![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/output_pic.png)
       
@@ -128,13 +128,13 @@ CLAHE | sử dụng phương pháp CLAHE để cân bằng histogram
     * Là một  dạng như U-net sử dụng đối xứng cấu trúc encoder và decoder với nhau có chiều dài L là 7 mà nó sẽ lấy Intermediate feature map F1(x) là input và học để trích xuất và mã hóa nó thành muti-scale feature ( nó có thể học được cái đặc trưng từ nhiều tỷ lệ khác nhau). Các muti-scale feature thì được trích xuất xuống dần các feature maps và sẽ được mã hóa lại thành các feature maps có độ phân giải cao bằng cách lấy mẫu tăng dần, ghép nối  và tích chập với nhau. Lớp convolutional cuối cùng trong chuỗi có tốc độ giãn nở là 2, được biểu thị bằng ( d=2 ), cho phép mạng có trường tiếp nhận rộng hơn và thu được nhiều thông tin theo ngữ cảnh hơn mà không cần tăng số lượng tham số.
     * Cuối cùng là sự kết hợp của đặc trưng cục bộ được lấy từ ban đầu với đặc trưng đa tỉ lệ qua bước U-block: F1(x)+U(F1(x)).
     <p align ="middle">   
-  <img src="https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/phan%20phoi%20vi%20tri%20bb.png?raw=true" alt="drawing" width="400" height='300'/>
-  <img src="https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/phan%20phoi%20kich%20thuoc%20bb.png?raw=true" alt="drawing" width="400" height='300'/>
+  <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/RSU.jpg" alt="drawing" width="400" height='300'/>
+  <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/U_block.png" alt="drawing" width="400" height='300'/>
 
   Hình 2.2.3.6. Phân bố kích thước, vị trí của bounding box trên tập Train.
 </p>
 ##**4.3 U^2-Net structure**
-  <img src="https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/phan%20phoi%20vi%20tri%20bb.png?raw=true" alt="drawing" width="400" height='300'/>
+  <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/U2_architect.jpg" width="400" height='300'/>
  *  Cấu trúc của U2-Net có 3 phần chính : (1) 6 giai đoạn mã hóa, (2) 5 giai đoạn giải mã và (3) một module tổng hợp bản đồ saliency được gắn với các giai đoạn giải mã và giai đoạn mã hóa cuối cùng: 
     * Trong các giai đoạn mã hóa En 1, En 2, En 3 và En 4, chúng tôi sử dụng các khối U còn lại lần lượt là RSU-7, RSU-6, RSU-5 và RSU-4. Như đã đề cập trước đó, “7”, “6”, “5” và “4” biểu thị chiều cao (L) của khối RSU. Đối với các feature maps có chiều cao và chiều rộng lớn, chúng tôi sử dụng L lớn hơn để thu được nhiều thông tin tỷ lệ lớn hơn. Do đó, trong cả hai giai đoạn En 5 và En 6, RSU-4F là RSU là một phiên bản giãn nở, trong đó  thay thế các hoạt động gộp và lấy mẫu lại bằng các convolutions  giãn nở.
     * Các giai đoạn giải mã có cấu trúc tương tự như các giai đoạn mã hóa đối xứng của chúng. Trong De 5, chúng tôi cũng sử dụng phần dư U-block RSU-4F phiên bản giãn nở tương tự như phiên bản được sử dụng trong các giai đoạn mã hóa En 5 và En 6. Mỗi giai đoạn giải mã lấy sự kết hợp của các bản đồ tính năng được lấy mẫu từ giai đoạn trước đó và các bản đồ từ giai đoạn bộ mã hóa đối xứng của nó làm đầu vào.
@@ -149,7 +149,7 @@ CLAHE | sử dụng phương pháp CLAHE để cân bằng histogram
   * Môi trường train và đánh giá:
     * Tiến hành train trên Kaggle, Kaggle là một nền tảng trực tuyến cho cộng đồng Machine Learning (ML) và Khoa học dữ liệu. Kaggle cho phép người dùng chia sẻ, tìm kiếm các bộ dữ liệu; tìm hiểu và xây dựng models, tương tác với những nhà khoa học và kỹ sư ML trên toàn thế giới; tham gia các cuộc thi để có cơ hội chiến thắng những giải thưởng giá trị. Người dùng Kaggle sẽ được hỗ trợ Graphic Processing Unit (GPU) và gần đây có thêm Tensor Processing Unit (TPU) để tăng tốc độ tính toán trong quá trình training cũng như inference.
 
-  ![](https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/colab%20gpu.png?raw=true "Kiểm tra gpu của Colab")
+  ![]()
   
    * Kaggle có một điểm tiện lợi hơn so với Google Colab là ở chỗ ta có thể save lại các version, nên ta có thể lưu trữ các file weight, cũng như những file log. Tuy nhiên, do có giới hạn về thời gian, cụ thể là 30 giờ/tuần, sẽ cập nhật lại vào thứ 7 hằng tuần nên quá trình train diễn ra thường bị ngắt quãng.
 
@@ -191,14 +191,10 @@ SAD là thang đo cho phép xác định độ lệch trung bình của giá tr�
 Sau khi huấn luyện mô hình trên 450 epochs, mỗi epoch tốn khoảng 1 tiếng hơn, giá trị các hàm loss trên tập validation không thay đổi đáng kể, còn hàm loss thì có xu hướng giảm nhẹ xung quanh 0.985. Cho rằng mô hình đã hội tụ nên nhóm dừng train, chọn ra best.weights để tiến hành đánh giá.
 Trong đó:
 
-![](https://github.com/lynguyenminhuit/CS114.M11/blob/master/Final_Project/Image%20in%20report/calcula%20mAP.png?raw=true)  
+![](https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/compare_model.png) 
 
 Từ kết quả, ta đúc kết được rằng, mô hình chưa thật sự hiệu quả do thiếu tài nguyên huấn luyện cũng như phương pháp tiếp cận chưa tốt. Cần phải huấn luyện thêm để có thể đạt được kết quả tiệm cận với với những mô hình khác, thậm chí là tốt hơn vì đây là một mô hình đủ tốt để có thể phát triển trong tương lai
 
-YOLOv4 | YOLOv5 
---- | --- 
-Khi predict trên video, FPS được tính tự động. | Khi predict trên video, có trả về thời gian trung bình khi xử lý 1 frame. Theo như định nghĩa FPS, chúng em lấy nghịch đảo giá trị thời gian trên là giá trị của FPS.
-Tính FPS trung bình của 11 video trong tập test. | Tính FPS trung bình của 11 video trong tập test.
 
 <a name="ungdung"></a>
 # **6. Ứng Dụng và Hướng Phát Triển**
@@ -215,26 +211,26 @@ Tính FPS trung bình của 11 video trong tập test. | Tính FPS trung bình c
 
 ## **6.2. Hướng phát triển trong tương lai**
 
-*	-	Làm cái ứng dụng remove background chạy Real-time
-*	-	Loại bỏ và thay thế bằng nền khác.
+*	-	Cải tiến mô hình để có thể inference Real-time.
+*	-	Huấn luyện mô hình với dữ liệu được tăng cường bằng cách thay đổi background
 *	-	Ứng dụng nhiều hơn và các ứng dụng photoshop như là một công cụ hỗ trợ.
 
 
 <a name="demo"></a>
 # **7. Demo mô hình**
 
- [Demo.](./API/)
+ [Demo.](./Demo/)
 
 <a name="thamkhao"></a>
 # **8. Tài liệu tham khảo**
 
 **Tìm hiểu về model Yolov4:**
 
-[1]https://phamdinhkhanh.github.io/2020/03/10/DarknetGoogleColab.html
+[1]https://arxiv.org/abs/2005.09007
 
-[2]https://www.youtube.com/watch?v=mmj3nxGT2YQ
+[2]https://paperswithcode.com/dataset/p3m-10k
 
-[3]https://towardsdatascience.com/yolov5-compared-to-faster-rcnn-who-wins-a771cd6c9fb4
+[3]https://arxiv.org/abs/2104.14222
 
 **Mẫu bài báo cáo**
 
