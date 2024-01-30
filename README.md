@@ -55,7 +55,8 @@ Hoàng Gia Huy | 19521607 | 19521607@gm.uit.edu.vn | https://github.com/ItsHuyne
 ## **2.2. INPUT và OUTPUT Bài toán**
   * INPUT: 
     * Một tấm ảnh chụp chân dung của 1 hoặc 2 người ở thế giới thực với đa dạng background, kích thước tấm ảnh đầu vào là 512x512.
-    ![]((https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/Input_pic.png))
+    ![]
+(https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/Input_pic.png)
   * OUTPUT: 
     * Là một ảnh mask có cùng kích thước với input, có:
       * các pixel sẽ có các giá trị từ 0-255 đại diện cho xác suất các pixel đó thuộc về foreground hay background.
