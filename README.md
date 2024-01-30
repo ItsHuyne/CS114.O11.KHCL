@@ -131,9 +131,9 @@ CLAHE | sử dụng phương pháp CLAHE để cân bằng histogram
   <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/RSU.jpg" alt="drawing" width="400" height='300'/>
   <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/U_block.png" alt="drawing" width="400" height='300'/>
 </p>
-##**4.3 U^2-Net structure**
- *
-  * <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/U2_architect.jpg" width="400" height='300'/>
+	##**4.3 U^2-Net structure**
+ * Cấu trúc: 
+ <img src="https://github.com/ItsHuyne/CS114.O11.KHCL/blob/main/Image_in_Report/U2_architect.jpg" alt="drawing" width="400" height='300'/>
  *  Cấu trúc của U2-Net có 3 phần chính : (1) 6 giai đoạn mã hóa, (2) 5 giai đoạn giải mã và (3) một module tổng hợp bản đồ saliency được gắn với các giai đoạn giải mã và giai đoạn mã hóa cuối cùng: 
     * Trong các giai đoạn mã hóa En 1, En 2, En 3 và En 4, chúng tôi sử dụng các khối U còn lại lần lượt là RSU-7, RSU-6, RSU-5 và RSU-4. Như đã đề cập trước đó, “7”, “6”, “5” và “4” biểu thị chiều cao (L) của khối RSU. Đối với các feature maps có chiều cao và chiều rộng lớn, chúng tôi sử dụng L lớn hơn để thu được nhiều thông tin tỷ lệ lớn hơn. Do đó, trong cả hai giai đoạn En 5 và En 6, RSU-4F là RSU là một phiên bản giãn nở, trong đó  thay thế các hoạt động gộp và lấy mẫu lại bằng các convolutions  giãn nở.
     * Các giai đoạn giải mã có cấu trúc tương tự như các giai đoạn mã hóa đối xứng của chúng. Trong De 5, chúng tôi cũng sử dụng phần dư U-block RSU-4F phiên bản giãn nở tương tự như phiên bản được sử dụng trong các giai đoạn mã hóa En 5 và En 6. Mỗi giai đoạn giải mã lấy sự kết hợp của các bản đồ tính năng được lấy mẫu từ giai đoạn trước đó và các bản đồ từ giai đoạn bộ mã hóa đối xứng của nó làm đầu vào.
